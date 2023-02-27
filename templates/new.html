@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+	</head>
+	<body>
+		<header>
+			<h1>Add New Result</h1>
+		</header>
+		<section>
+			<article>
+				<form method="post" action="/new/">
+					<label>Polling Unit Name</label>
+					<input type="text" name="pu_name" required><br>
+					<label>Polling Unit Number</label>
+					<input type="text" name="pu_number" required><br>
+					<label>Polling Unit ID</label>
+					<input type="text" name="pu_id"><br>
+					<label>Polling Unit Description</label>
+					<input type="text" name="pu_desc"><br>
+					<label>Ward Name</label>
+					<select name="ward">
+						<option disabled>Select ward</option>
+						{%for ward_id, ward_name in wards%}
+						<option>{{ward_id}} {{ward_name}}</option>
+						{% endfor %}
+					</select><br>
+					<label>LGA name</label>
+					<select name="lga">
+						{% for lga_id, lga_name in lgas %}
+						<option>{{lga_id}} {{lga_name}}</option>
+						{% endfor %}
+					</select><br>
+					<label>Polling Unit Longitude</label>
+					<input type="text" name="long" required><br>
+					<label>Polling Unit Latitude</label>
+					<input type="text" name="lat" required><br>
+					<label>Party Name</label>
+					<select name="party">
+						<option disabled>Select party</option>
+						{% for party, partyid in parties%}
+						<option>{{party}}</option>
+						{% endfor %}
+					</select><br>
+					<label>Score</label>
+					<input type="number" name="score" required><br>
+					<button>OK</button>
+				</form>
+			</article>
+		</section>
+		<footer>
+			<div>
+				Powered by Bincom
+			</div>
+		</footer>
+	</body>
+</html>

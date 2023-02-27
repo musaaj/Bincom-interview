@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}"/>
+	</head>
+	<body>
+		<header>
+			<h1>Polling Unit ANNOUNCER</h1>
+		</header>
+		<section>
+			<form method="post" action="/">
+		    <select name="select_pu">
+					<option>Select Polling Unit</option>
+			    {% for pu in polling_units %}
+			    <option>{{pu[0]}} {{pu[1]}}</option>
+			    {% endfor %}
+		    </select>
+				<button class="btn" name="OK" type="submit">OK</button>
+			</form>
+			<article>
+				{% if pu_info %}
+				<div>
+					<ul>
+						<li><span class="label">Polling unit name:</span>
+							{{pu_info['polling_unit_name'].capitalize()}}
+						</li>
+						<li><span class="label">Polling unit number:</span>
+							{{pu_info['polling_unit_number']}}
+						</li>
+						<li><span class="label">Polling unit desc:</span>
+							{% if pu_info['polling_unit_description'] %}
+							{{pu_info['polling_unit_description'].capitalize()}}
+							{% endif %}
+						</li>
+						<li><span class="label">Entered By:</span>
+							{% if pu_info['entered_by_user'] %}
+							{{pu_info['entered_by_user']}}
+							{% endif %}
+						</li>
+					</ul>
+				</div>
+				{% endif %}
+				{% if scores %}
+				<table>
+				  <thead>
+					  <th>ACN</th>
+					  <th>ANPP</th>
+					  <th>CDC</th>
+					  <th>CPC</th>
+					  <th>DPP</th>
+					  <th>JP</th>
+					  <th>LABOUR</th>
+					  <th>PDP</th>
+					  <th>PPA</th>
+				  </thead>
+					<tr>
+						{%for score in scores %}
+						<td>{{score[0]}}</td>
+						{% endfor %}
+					</tr>
+				</table>
+				{% endif %}
+				{%if not scores %}
+				<div>
+					No result available
+				</div>
+				{% endif %}
+			</article>
+		</section>
+		<footer>
+			<div>Powered by Bincom</div>
+		</footer>
+	</body>
+</html>

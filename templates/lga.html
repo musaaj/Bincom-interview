@@ -1,0 +1,45 @@
+<!Doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	</head>
+	<body>
+		<header>
+			<h1>LGA Result Announcer</h1>
+		</header>
+		<section>
+			<form method="post" action="/lga/">
+				{% if lgas %}
+				<label>Select an LGA</label><br>
+				<select name="lga_id">
+					<option>Select LGA</option>
+					{% for lgaid, lga_name in lgas%}
+					<option>{{lgaid}} {{lga_name}}</option>
+					{% endfor %}
+				</select>
+				{% endif %}
+				<button type="submit" name="ok">OK</button>
+			</form>
+			<article>
+				{% if lga_result %}
+				<div>
+					<ul>
+						<li>LGA name: {{info.lga_name}}</li>
+						<li>LGA id: {{info.lga_id}}</li>
+					</ul>
+					<h6>Total Vote Cast</h6>
+					<p>{{lga_result}}</p>
+				</div>
+				{% endif %}
+				{% if not lga_result%}
+				<div>
+					<p>No result available yet!</p>
+				</div>
+				{% endif %}
+			</article>
+		</section>
+		<footer>
+			<div>Powered by Bincom</div>
+		</footer>
+	</body>
+</html>
